@@ -1,0 +1,270 @@
+*{
+	padding:0;
+	margin:0;
+	transition: 0.5s;
+}
+.cart{
+	position: fixed;
+	bottom: 0;
+	right: 40px;
+	z-index: 999;
+	transform: translateY(calc(100% - 50px));
+	transition: .3s all ease-in;
+}
+.cart:hover{
+	transform: none;
+}
+.cart-container{
+	max-height: 400px;
+	overflow-y: scroll;
+}
+.btn-container{
+	width: 100%;
+	display: flex;
+	align-items: end;
+	justify-content: flex-end;
+}
+.line{
+	background-color: #0075dd;
+	height: 30px;
+}
+.card-img-top{
+	height: 300px;
+	object-fit: cover;
+}
+.w-100{
+	width: 100%;
+}
+.svg{
+	width: 20px;
+}
+.actions, .price{
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	width: 100%;
+}
+.h-300{
+	height: 600px!important;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: url(https://i.pinimg.com/originals/55/3b/4d/553b4d37d549b9ef2be2c9c8d8133aee.jpg);
+}
+.dark{
+	color: white
+}
+.header{
+	position: relative;
+	background-color: #ffffff;
+	padding-top: 1%;
+	margin-left: 10%;
+	margin-right: 10%;
+	height: 105px;
+}
+.first{
+	position: relative;
+	height: 100px;
+	width: 100px;
+}
+.textheader{
+	position: absolute;
+	top: 15%;
+	font-size: 40px;
+	margin-left: 11%;
+	color: #2e5b79;
+}
+.dws-menu{
+	position: absolute;
+	top: 60%;
+	left: 10%;
+}
+.dws-menu ul, .dws-menu ol{
+	list-style: none;
+}
+.dws-menu > ul{
+	display: flex;
+}
+.dws-menu > ul li a{
+	display: block;
+	padding: 15px 30px 15px 40px;
+	font-size: 15px;
+	color: #2e5b79;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all 0.3s ease; 
+}
+.dws-menu > ul li{
+	position: relative;
+}
+.dws-menu > ul li > a i.fa{
+	position: absolute;
+	top: 15px;
+	left: 12px;
+	font-size: 18px;
+}
+.dws-menu li a:hover{
+	color: #0d83dd;
+	transition: all 0.3s ease; 
+}
+.dws-menu li ul{
+	position: absolute;
+	min-width: 150px;
+	display: none;
+}
+.dws-menu li > ul li{
+	
+}
+.dws-menu li > ul li a{
+	padding: 10px;
+	text-transform: none;
+	background: #ffffff;
+	border-radius: 1px 1px 1px 1px;
+}
+.dws-menu li:hover > ul{
+	display: block;
+}
+.content1{
+	margin-left: 10%;
+	margin-right: 10%;
+	height: 510px;
+}
+.second{
+	height: 100%;
+	width: 100%;
+}
+.separate1{
+	position:relative;
+	margin-left: 10%;
+	margin-right: 10%;
+	background-color: #f7f8f9;
+	height: 50px;
+	text-align: center;
+	padding-top: 2%;
+}
+.text1{
+	font-size: 20px;
+}
+.content2{
+	position: relative;
+	height: 430px;
+	background-color: #ffffff;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.text2{
+	text-align: center;
+	font-size: 30px;
+	color: #0075dd;
+}
+.one{
+	position: absolute;
+	height: 400px;
+	width: 200px;
+	margin-left: 10%;
+	margin-top: 3%;
+	
+}
+.left{
+	height: 200px;
+	width: 200px;
+	border-radius: 10px 10px 10px 10px;
+}
+.textleft{
+	margin-top: 5%;
+	color: #2e5b79;
+	line-height: 1.5;
+}
+.two{
+	position: absolute;
+	height: 400px;
+	width: 200px;
+	margin-left: 43%;
+	margin-top: 3%;
+}
+.center{
+	height: 200px;
+	width: 200px;
+	border-radius: 10px 10px 10px 10px;
+}
+.textcenter{
+	margin-top: 5%;
+	color: #2e5b79;
+	line-height: 1.5;
+}
+.three{
+	position: absolute;
+	height: 400px;
+	width: 200px;
+	margin-left: 75%;
+	margin-top: 3%;
+}
+.right{
+	height: 200px;
+	width: 200px;
+	border-radius: 10px 10px 10px 10px;
+}
+.textright{
+	margin-top: 5%;
+	color: #2e5b79;
+	line-height: 1.5;
+}
+.line2{
+	position: relative;
+	margin-top: 1%;
+	background-color: #0075dd;
+	height: 30px;
+}
+
+.light{
+	color: #161616
+}
+
+.description{
+	font-size: 26px;
+}
+@media screen and (max-width:1005px){
+	.textheader{
+		font-size: 33px;
+		margin: 0;
+		left: 20%;
+	}
+	.dws-menu{
+		left: 16%;
+	}
+}
+@media screen and (max-width:790px){
+	.dws-menu > ul li a{
+		font-size: 10px;
+	}
+	.dws-menu > ul li a{
+		padding: 15px 30px 15px 35px;
+	}
+}
+@media screen and (max-width:990px){
+	.one{
+		width: 100px;
+	}
+	.left{
+		height: 100px;
+		width: 100px;
+	}
+	.two{
+		width: 100px;
+	}
+	.center{
+		height: 100px;
+		width: 100px;
+	}
+	.three{
+		width: 100px;
+	}
+	.right{
+		height: 100px;
+		width: 100px;
+	}
+}

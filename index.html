@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SemiCom</title>
+	<link rel="icon" href="img/icon.png">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+</head>
+
+<body bgcolor="#fafafb">
+	<div id="app">
+		<div class="card cart" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">Корзина</h5>
+				<h6 class="card-subtitle mb-2 text-body-secondary">Ваши товары</h6>
+				<template v-if="!cartItems.length">
+					<div class=" w-100 alert alert-primary d-flex align-items-center" role="alert">
+						<svg width="20px" xmlns="http://www.w3.org/2000/svg"
+							class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img"
+							aria-label="Warning:">
+							<path
+								d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+						</svg>
+						<div>
+							Добавьте товары
+						</div>
+					</div>
+				</template>
+				<template>
+					<div class="cart-container">
+						<div v-for="(item, index) in cartItems" class="card cart-item p-2 mb-2">
+							<div class="card-title">
+								{{item.title}}
+							</div>
+							<div class="card-subtitle">
+								{{item.price}} ₽
+							</div>
+							<div class="btn-container">
+								<button @click="removeCartItem(index)" href="#" class="btn btn-danger">убрать</button>
+							</div>
+						</div>
+					</div>
+				</template>
+				<div class="btn-container">
+					<a :disabled="!cartItems.length" href="#contact" class="btn btn-primary">Заказать</a>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">SemiCom</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+					aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#">Главная</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#who">Кто мы?</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#contact">Связаться</a>
+						</li>
+					</ul>
+					<span class="navbar-text">
+						+7 (902) 233-23-23
+					</span>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="h-300" alt="...">
+				<h1 class="dark">SemiCom - ваш мобильный выбор</h1>
+			</div>
+			<h3 class="mt-3 mb-3">Мобильные устройства</h3>
+			<div class="input-group input-group-md mb-3">
+				<span class="input-group-text" id="inputGroup-sizing-md">Найти телефон</span>
+				<input type="text" v-model="search" class="form-control" aria-label="Sizing example input"
+					aria-describedby="inputGroup-sizing-md">
+			</div>
+			<div class="justify-content-between align-center d-flex mb-2 flex-wrap ">
+				<template v-if="computedPhones.length">
+					<div v-for="item in computedPhones" class="card mb-2" style="width: 49.5%">
+						<img :src="getImg(item.image)" class="card-img-top" alt="...">
+						<div class="card-body">
+							<div class="card-title">{{item.title}}</div>
+							<p class="card-text">{{item.description}}</p>
+							<div class="price text-info mb-2">{{item.price}} ₽</div>
+							<div class="actions">
+								<div @click="addToCart(item)" class="btn btn-primary">В корзину</div>
+							</div>
+						</div>
+					</div>
+				</template>
+				<template v-else>
+					<div class=" w-100 alert alert-primary d-flex align-items-center" role="alert">
+						<svg width="20px" xmlns="http://www.w3.org/2000/svg"
+							class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img"
+							aria-label="Warning:">
+							<path
+								d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+						</svg>
+						<div>
+							Телефонов не найдено...
+						</div>
+					</div>
+				</template>
+			</div>
+			<h1 id="who" class="mt-4 light">Кто мы?</h1>
+			<div class="description">
+				Мы ведущая фирма в сфере продажи мобильных устройств. Занимаемся поставками самых различных гаджетов, от
+				самых популярных до самых неизвестных широкой публике.
+				На нашем сайте вы можете подобрать себе мобильный телефон по вкусу и выполнить заказ, после чего наш
+				менеджер свяжется с вами для уточнения деталей заказа.
+			</div>
+			<h1 id="contact" class="mt-4 light">Связаться с нами</h1>
+			<div  class="mb-4">
+				<div class="form-group mb-2">
+					<label for="exampleInputEmail1">Мобильный телефон</label>
+					<input v-model="form.phone" type="text" class="form-control" id="inputPhone"
+						aria-describedby="phoneHelp" placeholder="Введите номер телефона">
+					<small id="phoneHelp" class="form-text text-muted">Данные конфиденциальны</small>
+				</div>
+				<div class="form-group mb-2">
+					<label for="exampleInputPassword1">Как вас зовут</label>
+					<input v-model="form.name" type="text" class="form-control" id="exampleInputPassword1"
+						placeholder="Ваше имя">
+				</div>
+
+				<button type="submit" @click="callback" class="btn btn-primary">Заказать обратный звонок</button>
+			</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/imask"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+	<script>
+
+		const vue = new Vue({
+			el: "#app",
+			data() {
+				return ({
+					phones: [],
+					search: "",
+					cartItems: [],
+					form: {
+						phone: "",
+						name: ""
+					}
+				})
+			},
+			mounted() {
+				var element = document.getElementById('inputPhone');
+				var maskOptions = {
+					mask: '+{7}(000)000-00-00'
+				};
+				var mask = IMask(element, maskOptions);
+				const cartItems = JSON.parse(localStorage.getItem("cart"))
+				if (cartItems) {
+					this.cartItems = cartItems
+				}
+				axios
+					.post(
+						"./php/test.php",
+					)
+					.then((response) => {
+						this.phones = response.data
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+			},
+			methods: {
+				getImg(img) {
+					return "/img/" + img.split("img")[1]
+				},
+				addToCart(item) {
+					this.cartItems.push(item)
+					Swal.fire({
+						title: 'Отлично',
+						text: 'Товар был добавлен в корзину',
+						icon: 'success',
+					})
+				},
+				removeCartItem(index) {
+					this.cartItems.splice(index, 1)
+				},
+				callback() {
+					let message = ""
+					if(this.form.name){
+						message+=` Имя пользователя ${this.form.name}`
+					}
+					if(this.cartItems.length){
+						message+=` Товары пользователя ${this.cartItems.map(item=>item.title).join(", ")}`
+					}
+					if (this.form.phone.length == 16) {
+						axios.get(`./php/sendForm.php?phone=${this.form.phone}&message=${message}`)
+							.then((res)=>console.log(res))
+							.catch(err=>console.log(err))
+						Swal.fire({
+							title: 'Отлично',
+							text: 'Форма была отправлена',
+							icon: 'success',
+						})
+					} else{
+						Swal.fire({
+							title: 'Ошибка!',
+							text: 'Указан некорректный телефон',
+							icon: 'error',
+						})
+					}
+				}
+			},
+			computed: {
+				computedPhones() {
+					if (!this.search) return this.phones
+					return this.phones.filter((item) => item.description.indexOf(this.search) != -1 || item.description.indexOf(this.title) != -1)
+				}
+			},
+			watch: {
+				cartItems(val) {
+					localStorage.setItem("cart", JSON.stringify(val))
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
